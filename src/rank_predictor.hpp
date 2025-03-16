@@ -1,8 +1,6 @@
 #ifndef RANK_PREDICTOR_HPP
 #define RANK_PREDICTOR_HPP
 
-#include <boost/container_hash/hash.hpp>
-#include <unordered_map>
 #include <valarray>
 #include <vector>
 
