@@ -1,4 +1,4 @@
-#include "rank_predictor.hpp"
+#include "rank_predictor/dp.hpp"
 #include <format>
 #include <iostream>
 using namespace rank_predictor;

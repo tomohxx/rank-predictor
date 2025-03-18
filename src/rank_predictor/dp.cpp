@@ -1,6 +1,6 @@
-#include "rank_predictor.hpp"
-#include "classify.hpp"
-#include "score.hpp"
+#include "dp.hpp"
+#include "detail/classify.hpp"
+#include "detail/score.hpp"
 #include <algorithm>
 #include <boost/container_hash/hash.hpp>
 #include <unordered_map>
