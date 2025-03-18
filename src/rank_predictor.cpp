@@ -7,11 +7,12 @@
 
 namespace rank_predictor {
   constexpr int NUM_CLASSES = 24;
-  constexpr int MAX_DELTA = 50;
+  constexpr int MAX_DELTA = 25;
+  constexpr int MIN_DELTA = -25;
   constexpr int SCALE = 1000;
 
   // 原点
-  const Dist origin = {25, 25, 25, 25};
+  const Dist origin(0., 4);
 
   struct Hash {
     std::size_t operator()(const Dist& dist) const
@@ -80,7 +81,9 @@ namespace rank_predictor {
 
   inline bool is_valid_dist(const Dist& dist)
   {
-    return std::all_of(std::cbegin(dist), std::cend(dist), [](const auto& x) { return x >= 0 && x < MAX_DELTA; });
+    return std::all_of(std::cbegin(dist), std::cend(dist), [](const auto& x) {
+      return x >= MIN_DELTA && x < MAX_DELTA;
+    });
   }
 
   Dist clip(const Dist& dist, const Dist& delta)
@@ -113,8 +116,7 @@ namespace rank_predictor {
     std::vector<double> rank_classes(NUM_CLASSES, 0.);
 
     for (const auto& [dist, prob] : dist_prob) {
-      const Dist delta = (dist - origin) * SCALE;
-      const int rank_class = detail::classfiy(initial + delta);
+      const int rank_class = detail::classfiy(initial + dist * SCALE);
 
       rank_classes.at(rank_class) += prob;
     }
