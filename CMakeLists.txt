@@ -9,6 +9,7 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O3 -Wall -Wextra")
 add_library(rank_predictor STATIC
   src/rank_predictor/detail/classify.cpp
   src/rank_predictor/detail/score.cpp
+  src/rank_predictor/common.cpp
   src/rank_predictor/dp.cpp
   src/rank_predictor/mc.cpp)
 set_target_properties(rank_predictor PROPERTIES PUBLIC_HEADER src/rank_predictor.hpp)
