@@ -7,7 +7,6 @@
 
 namespace rank_predictor {
   constexpr int NUM_CLASSES = 24;
-  constexpr int SCALE = 1000;
 
   // 原点
   const Dist origin(0., 4);
@@ -46,14 +45,14 @@ namespace rank_predictor {
     Dist delta(0, NUM_PLAYERS);
 
     if (actor == target) {
-      const auto [x, y] = detail::calc_score_tsumo(fu, han, actor == oya);
+      const auto [x, y] = detail::calc_score_tsumo(fu, han, actor == oya, false);
 
       for (int pid = 0; pid < NUM_PLAYERS; ++pid) {
         delta[pid] = (pid == actor ? (pid == oya ? x * 3 : x * 2 + y) : (pid == oya ? -y : -x));
       }
     }
     else {
-      delta[actor] = detail::calc_score_ron(fu, han, actor == oya);
+      delta[actor] = detail::calc_score_ron(fu, han, actor == oya, false);
       delta[target] = -delta[actor];
     }
 
@@ -102,7 +101,7 @@ namespace rank_predictor {
         oya = (oya + 1) % NUM_PLAYERS;
       }
 
-      const int rank_class = detail::classfiy(initial + dist * SCALE);
+      const int rank_class = detail::classfiy(initial + dist);
 
       ++rank_classes.at(rank_class);
     }

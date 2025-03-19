@@ -27,10 +27,26 @@ namespace {
   {
     return (n + 5) / 10;
   }
+
+  // 1000点未満を四捨五入する
+  inline std::pair<int, int> round(const std::pair<int, int>& p)
+  {
+    return {round(p.first), round(p.second)};
+  }
+
+  inline int round_if(const int n, const bool b)
+  {
+    return b ? round(n) : n * 100;
+  }
+
+  inline std::pair<int, int> round_if(const std::pair<int, int>& p, const bool b)
+  {
+    return b ? round(p) : std::make_pair(p.first * 100, p.second * 100);
+  }
 }
 
 namespace rank_predictor::detail {
-  std::pair<int, int> calc_score_tsumo(int fu, int han, bool is_oya)
+  std::pair<int, int> calc_score_tsumo(const int fu, const int han, const bool is_oya)
   {
     assert(fu != 0 && han != 0);
 
@@ -44,7 +60,7 @@ namespace rank_predictor::detail {
     }
   }
 
-  int calc_score_ron(int fu, int han, bool is_oya)
+  int calc_score_ron(const int fu, const int han, const bool is_oya)
   {
     assert(fu != 0 && han != 0);
 
@@ -57,66 +73,76 @@ namespace rank_predictor::detail {
       return greater_than_2000_ron(han, is_oya);
     }
   }
+
+  std::pair<int, int> calc_score_tsumo(const int fu, const int han, const bool is_oya, const bool rounding)
+  {
+    return round_if(calc_score_tsumo(fu, han, is_oya), rounding);
+  }
+
+  int calc_score_ron(int fu, int han, bool is_oya, bool rounding)
+  {
+    return round_if(calc_score_ron(fu, han, is_oya), rounding);
+  }
 }
 
 namespace {
-  // NOTE: 1000点未満の点数を切り捨て, 点数を1000で割った値を返す
+  // NOTE: 100点未満の点数を切り捨て, 点数を1000で割った値を返す
 
   std::pair<int, int> less_than_2000_tsumo(const int base_score, const bool is_oya)
   {
     if (is_oya) {
-      return std::make_pair(round(ceil(base_score * 2)), 0);
+      return std::make_pair(ceil(base_score * 2), 0);
     }
     else {
-      return std::make_pair(round(ceil(base_score)), round(ceil(base_score * 2)));
+      return std::make_pair(ceil(base_score), ceil(base_score * 2));
     }
   }
 
   int less_than_2000_ron(const int base_score, const bool is_oya)
   {
     if (is_oya) {
-      return round(ceil(base_score * 6));
+      return ceil(base_score * 6);
     }
     else {
-      return round(ceil(base_score * 4));
+      return ceil(base_score * 4);
     }
   }
 
   std::pair<int, int> greater_than_2000_tsumo(const int han, const bool is_oya)
   {
     if (han <= MANGAN) {
-      return is_oya ? std::make_pair(4, 0) : std::make_pair(2, 4);
+      return is_oya ? std::make_pair(40, 0) : std::make_pair(20, 40);
     }
     else if (han <= HANEMAN) {
-      return is_oya ? std::make_pair(6, 0) : std::make_pair(3, 6);
+      return is_oya ? std::make_pair(60, 0) : std::make_pair(30, 60);
     }
     else if (han <= BAIMAN) {
-      return is_oya ? std::make_pair(8, 0) : std::make_pair(4, 8);
+      return is_oya ? std::make_pair(80, 0) : std::make_pair(40, 80);
     }
     else if (han <= SANBAIMAN) {
-      return is_oya ? std::make_pair(12, 0) : std::make_pair(6, 12);
+      return is_oya ? std::make_pair(120, 0) : std::make_pair(60, 120);
     }
     else {
-      return is_oya ? std::make_pair(16, 0) : std::make_pair(8, 16);
+      return is_oya ? std::make_pair(160, 0) : std::make_pair(80, 160);
     }
   }
 
   int greater_than_2000_ron(const int han, const bool is_oya)
   {
     if (han <= MANGAN) {
-      return is_oya ? 12 : 8;
+      return is_oya ? 120 : 80;
     }
     else if (han <= HANEMAN) {
-      return is_oya ? 18 : 12;
+      return is_oya ? 180 : 120;
     }
     else if (han <= BAIMAN) {
-      return is_oya ? 24 : 16;
+      return is_oya ? 240 : 160;
     }
     else if (han <= SANBAIMAN) {
-      return is_oya ? 36 : 24;
+      return is_oya ? 360 : 240;
     }
     else {
-      return is_oya ? 48 : 32;
+      return is_oya ? 480 : 320;
     }
   }
 }

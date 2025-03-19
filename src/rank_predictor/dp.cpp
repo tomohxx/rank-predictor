@@ -65,14 +65,14 @@ namespace rank_predictor {
     Dist delta(0, NUM_PLAYERS);
 
     if (actor == target) {
-      const auto [x, y] = detail::calc_score_tsumo(fu, han, actor == oya);
+      const auto [x, y] = detail::calc_score_tsumo(fu, han, actor == oya, true);
 
       for (int pid = 0; pid < NUM_PLAYERS; ++pid) {
         delta[pid] = (pid == actor ? (pid == oya ? x * 3 : x * 2 + y) : (pid == oya ? -y : -x));
       }
     }
     else {
-      delta[actor] = detail::calc_score_ron(fu, han, actor == oya);
+      delta[actor] = detail::calc_score_ron(fu, han, actor == oya, true);
       delta[target] = -delta[actor];
     }
 
