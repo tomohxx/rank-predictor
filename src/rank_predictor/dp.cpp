@@ -83,7 +83,7 @@ namespace rank_predictor {
 
     DistProb dist_prob;
 
-    dist_prob[Dist(0., 4)] = 1.;
+    dist_prob[Dist(0, 4)] = 1.;
 
     for (int step = 0; step < max_steps; ++step) {
       dist_prob = propagate(dist_prob, patterns, ryukyoku, oya);

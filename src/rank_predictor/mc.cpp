@@ -37,7 +37,7 @@ namespace rank_predictor {
     std::vector<int> rank_classes(NUM_CLASSES, 0);
 
     for (int i = 0; i < num_playout; ++i) {
-      Dist dist(0., 4);
+      Dist dist = initial;
 
       for (int step = 0; step < max_steps; ++step) {
         dist = propagate(dist, patterns, ryukyoku, oya, engine);
@@ -45,7 +45,7 @@ namespace rank_predictor {
         oya = (oya + 1) % NUM_PLAYERS;
       }
 
-      const int rank_class = detail::classfiy(initial + dist);
+      const int rank_class = detail::classfiy(dist);
 
       ++rank_classes.at(rank_class);
     }
