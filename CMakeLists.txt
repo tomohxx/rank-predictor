@@ -12,8 +12,12 @@ add_library(rank_predictor STATIC
   src/rank_predictor/common.cpp
   src/rank_predictor/dp.cpp
   src/rank_predictor/mc.cpp)
-set_target_properties(rank_predictor PROPERTIES PUBLIC_HEADER src/rank_predictor.hpp)
-install(TARGETS rank_predictor EXPORT RankPredictor)
+set(PUBLIC_HEADERS
+  src/rank_predictor/dp.hpp
+  src/rank_predictor/mc.hpp)
+set_target_properties(rank_predictor PROPERTIES PUBLIC_HEADER "${PUBLIC_HEADERS}")
+install(TARGETS rank_predictor EXPORT RankPredictor
+  PUBLIC_HEADER DESTINATION inlcude/rank_predictor)
 install(EXPORT RankPredictor FILE RankPredictorConfig.cmake DESTINATION share/cmake)
 
 add_executable(main1 src/main1.cpp)
