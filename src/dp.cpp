@@ -1,9 +1,9 @@
-#include "dp.hpp"
 #include "common.hpp"
 #include "detail/classify.hpp"
 #include <algorithm>
 #include <boost/container_hash/hash.hpp>
 #include <boost/unordered/unordered_flat_map.hpp>
+#include <mahjong/rank_predictor/dp.hpp>
 
 namespace rank_predictor::dp {
   constexpr int MAX_DELTA = 25;

@@ -1,4 +1,3 @@
-#include "nd.hpp"
 #include "common.hpp"
 #include "detail/classify.hpp"
 #include <algorithm>
@@ -11,6 +10,7 @@
 #include <cmath>
 #include <iterator>
 #include <limits>
+#include <mahjong/rank_predictor/nd.hpp>
 #include <tuple>
 #include <utility>
 namespace ublas = boost::numeric::ublas;

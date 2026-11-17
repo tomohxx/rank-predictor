@@ -1,6 +1,6 @@
-#include "mc.hpp"
 #include "common.hpp"
 #include "detail/classify.hpp"
+#include <mahjong/rank_predictor/mc.hpp>
 
 namespace rank_predictor::mc {
   Dist propagate(const Dist& source,
