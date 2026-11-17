@@ -1,8 +1,10 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.20)
 
 project(rank-predictor LANGUAGES CXX)
 
 include(GNUInstallDirs)
+
+find_package(Boost 1.81 REQUIRED)
 
 add_library(rank_predictor
   src/detail/classify.cpp
@@ -11,6 +13,8 @@ add_library(rank_predictor
   src/dp.cpp
   src/mc.cpp
   src/nd.cpp)
+target_link_libraries(rank_predictor PRIVATE
+  $<BUILD_INTERFACE:Boost::headers>)
 target_compile_features(rank_predictor PUBLIC cxx_std_23)
 target_compile_options(rank_predictor PUBLIC
   $<$<CONFIG:Debug>:-O0 -Wall -Wextra -g>
