@@ -3,7 +3,7 @@
 #include "detail/classify.hpp"
 #include <algorithm>
 #include <boost/container_hash/hash.hpp>
-#include <unordered_map>
+#include <boost/unordered/unordered_flat_map.hpp>
 
 namespace rank_predictor::dp {
   constexpr int MAX_DELTA = 25;
@@ -25,7 +25,7 @@ namespace rank_predictor::dp {
   };
 
   // 点数分布が実現する確率
-  using DistProb = std::unordered_map<Dist, double, Hash, Pred>;
+  using DistProb = boost::unordered_flat_map<Dist, double, Hash, Pred>;
 
   inline bool is_valid_dist(const Dist& dist)
   {
