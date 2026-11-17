@@ -22,10 +22,11 @@ target_include_directories(rank_predictor PUBLIC
 install(TARGETS rank_predictor
   EXPORT RankPredictor
   LIBRARY DESTINATION lib)
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/mahjong DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 install(EXPORT RankPredictor
   FILE RankPredictorConfig.cmake
   NAMESPACE RankPredictor::
-  DESTINATION ${CMAKE_INSTALL_LIBDIR}/share/cmake)
+  DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/mahjong)
 
 add_executable(main1 tests/main1.cpp)
 target_link_libraries(main1 rank_predictor)
