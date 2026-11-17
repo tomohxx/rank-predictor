@@ -1,32 +1,37 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.12)
 
-project(rank-predictor)
+project(rank-predictor LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 23)
-set(CMAKE_CXX_FLAGS_DEBUG "-O0 -Wall -Wextra -g")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -Wall -Wextra")
+include(GNUInstallDirs)
 
-add_library(rank_predictor STATIC
-  src/rank_predictor/detail/classify.cpp
-  src/rank_predictor/detail/score.cpp
-  src/rank_predictor/common.cpp
-  src/rank_predictor/dp.cpp
-  src/rank_predictor/mc.cpp
-  src/rank_predictor/nd.cpp)
-set(PUBLIC_HEADERS
-  src/rank_predictor/dp.hpp
-  src/rank_predictor/mc.hpp
-  src/rank_predictor/nd.hpp)
-set_target_properties(rank_predictor PROPERTIES PUBLIC_HEADER "${PUBLIC_HEADERS}")
-install(TARGETS rank_predictor EXPORT RankPredictor
-  PUBLIC_HEADER DESTINATION include/rank_predictor)
-install(EXPORT RankPredictor FILE RankPredictorConfig.cmake DESTINATION share/cmake)
+add_library(rank_predictor
+  src/detail/classify.cpp
+  src/detail/score.cpp
+  src/common.cpp
+  src/dp.cpp
+  src/mc.cpp
+  src/nd.cpp)
+target_compile_features(rank_predictor PUBLIC cxx_std_23)
+target_compile_options(rank_predictor PUBLIC
+  $<$<CONFIG:Debug>:-O0 -Wall -Wextra -g>
+  $<$<CONFIG:Release>:-O3 -Wall -Wextra>)
+target_include_directories(rank_predictor PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>)
 
-add_executable(main1 src/main1.cpp)
+install(TARGETS rank_predictor
+  EXPORT RankPredictor
+  LIBRARY DESTINATION lib)
+install(EXPORT RankPredictor
+  FILE RankPredictorConfig.cmake
+  NAMESPACE RankPredictor::
+  DESTINATION ${CMAKE_INSTALL_LIBDIR}/share/cmake)
+
+add_executable(main1 tests/main1.cpp)
 target_link_libraries(main1 rank_predictor)
 
-add_executable(main2 src/main2.cpp)
+add_executable(main2 tests/main2.cpp)
 target_link_libraries(main2 rank_predictor)
 
-add_executable(main3 src/main3.cpp)
+add_executable(main3 tests/main3.cpp)
 target_link_libraries(main3 rank_predictor)
