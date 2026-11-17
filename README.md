@@ -5,10 +5,11 @@ A tool for calculating expected final rank in Japanese mahjong.
 ## Build
 
 ```
-$ mkdir build
-$ cd build
-$ cmake .. -DCMAKE_BUILD_TYPE=Release
-$ make
+mkdir build
+cd build
+cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=</path/to/install>
+make
+make install
 ```
 
 ## Sample Program
