@@ -28,7 +28,7 @@ namespace mahjong::rank_predictor::mc {
                                                 const std::vector<int>& han_list,
                                                 const double ryukyoku,
                                                 const int max_steps,
-                                                int oya,
+                                                const int oya,
                                                 const int num_playout,
                                                 std::mt19937_64& engine)
   {
@@ -38,11 +38,13 @@ namespace mahjong::rank_predictor::mc {
 
     for (int i = 0; i < num_playout; ++i) {
       Dist dist = initial;
+      int current_oya = oya;
 
       for (int step = 0; step < max_steps; ++step) {
-        dist = propagate(dist, patterns, ryukyoku, oya, engine);
+
+        dist = propagate(dist, patterns, ryukyoku, current_oya, engine);
         // NOTE: 連荘は考慮しない
-        oya = (oya + 1) % NUM_PLAYERS;
+        current_oya = (current_oya + 1) % NUM_PLAYERS;
       }
 
       const int rank_class = detail::classfiy(dist);
