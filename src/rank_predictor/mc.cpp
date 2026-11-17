@@ -2,7 +2,7 @@
 #include "common.hpp"
 #include "detail/classify.hpp"
 
-namespace rank_predictor {
+namespace rank_predictor::mc {
   Dist propagate(const Dist& source,
                  const Patterns& patterns,
                  const double ryukyoku,

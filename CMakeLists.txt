@@ -11,10 +11,12 @@ add_library(rank_predictor STATIC
   src/rank_predictor/detail/score.cpp
   src/rank_predictor/common.cpp
   src/rank_predictor/dp.cpp
-  src/rank_predictor/mc.cpp)
+  src/rank_predictor/mc.cpp
+  src/rank_predictor/nd.cpp)
 set(PUBLIC_HEADERS
   src/rank_predictor/dp.hpp
-  src/rank_predictor/mc.hpp)
+  src/rank_predictor/mc.hpp
+  src/rank_predictor/nd.hpp)
 set_target_properties(rank_predictor PROPERTIES PUBLIC_HEADER "${PUBLIC_HEADERS}")
 install(TARGETS rank_predictor EXPORT RankPredictor
   PUBLIC_HEADER DESTINATION include/rank_predictor)
@@ -25,3 +27,6 @@ target_link_libraries(main1 rank_predictor)
 
 add_executable(main2 src/main2.cpp)
 target_link_libraries(main2 rank_predictor)
+
+add_executable(main3 src/main3.cpp)
+target_link_libraries(main3 rank_predictor)

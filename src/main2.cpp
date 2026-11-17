@@ -4,7 +4,7 @@
 
 int main()
 {
-  using rank_predictor::predict_rank;
+  using rank_predictor::mc::predict_rank;
 
   std::random_device seed_gen;
   std::mt19937_64 engine(seed_gen());

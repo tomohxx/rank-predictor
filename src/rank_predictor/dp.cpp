@@ -5,7 +5,7 @@
 #include <boost/container_hash/hash.hpp>
 #include <unordered_map>
 
-namespace rank_predictor {
+namespace rank_predictor::dp {
   constexpr int MAX_DELTA = 25;
   constexpr int MIN_DELTA = -25;
   constexpr int SCALE = 1000;

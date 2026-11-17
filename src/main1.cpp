@@ -4,7 +4,7 @@
 
 int main()
 {
-  using rank_predictor::predict_rank;
+  using rank_predictor::dp::predict_rank;
 
   const auto rank = predict_rank({25000, 33000, 17000, 25000}, {30}, {3, 4, 5}, 0.2, 7, 0);
 

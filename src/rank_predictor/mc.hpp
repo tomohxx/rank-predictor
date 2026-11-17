@@ -1,11 +1,11 @@
-#ifndef RANK_PREDICTOR_HPP
-#define RANK_PREDICTOR_HPP
+#ifndef RANK_PREDICTOR_MC_HPP
+#define RANK_PREDICTOR_MC_HPP
 
 #include <random>
 #include <valarray>
 #include <vector>
 
-namespace rank_predictor {
+namespace rank_predictor::mc {
   std::vector<std::vector<double>> predict_rank(const std::valarray<int>& initial,
                                                 const std::vector<int>& fu_list,
                                                 const std::vector<int>& han_list,
