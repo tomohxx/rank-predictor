@@ -5,7 +5,7 @@
 #include <boost/unordered/unordered_flat_map.hpp>
 #include <mahjong/rank_predictor/dp.hpp>
 
-namespace rank_predictor::dp {
+namespace mahjong::rank_predictor::dp {
   constexpr int MAX_DELTA = 25;
   constexpr int MIN_DELTA = -25;
   constexpr int SCALE = 1000;

@@ -89,7 +89,7 @@ namespace {
   }
 }
 
-namespace rank_predictor::nd {
+namespace mahjong::rank_predictor::nd {
   std::tuple<ublas::vector<double>, ublas::matrix<double>> propagate(const ublas::vector<double>& mu,
                                                                      const ublas::matrix<double>& covariance,
                                                                      const Patterns& patterns,

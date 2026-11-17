@@ -1,7 +1,7 @@
 #include "common.hpp"
 #include "detail/score.hpp"
 
-namespace rank_predictor {
+namespace mahjong::rank_predictor {
   Patterns make_patterns(const std::vector<int>& fu_list, const std::vector<int>& han_list)
   {
     Patterns patterns;

@@ -1,10 +1,10 @@
-#include "rank_predictor/mc.hpp"
 #include <format>
 #include <iostream>
+#include <mahjong/rank_predictor/mc.hpp>
 
 int main()
 {
-  using rank_predictor::mc::predict_rank;
+  using mahjong::rank_predictor::mc::predict_rank;
 
   std::random_device seed_gen;
   std::mt19937_64 engine(seed_gen());

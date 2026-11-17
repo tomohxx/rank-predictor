@@ -39,7 +39,7 @@ namespace {
   }
 }
 
-namespace rank_predictor::detail {
+namespace mahjong::rank_predictor::detail {
   int classfiy(const std::valarray<int>& scores)
   {
     assert(scores.size() == 4u);

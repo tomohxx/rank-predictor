@@ -1,10 +1,10 @@
-#include "rank_predictor/dp.hpp"
 #include <format>
 #include <iostream>
+#include <mahjong/rank_predictor/dp.hpp>
 
 int main()
 {
-  using rank_predictor::dp::predict_rank;
+  using mahjong::rank_predictor::dp::predict_rank;
 
   const auto rank = predict_rank({25000, 33000, 17000, 25000}, {30}, {3, 4, 5}, 0.2, 7, 0);
 

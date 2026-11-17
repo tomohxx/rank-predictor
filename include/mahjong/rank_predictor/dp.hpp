@@ -1,10 +1,10 @@
-#ifndef RANK_PREDICTOR_DP_HPP
-#define RANK_PREDICTOR_DP_HPP
+#ifndef MAHJONG_RANK_PREDICTOR_DP_HPP
+#define MAHJONG_RANK_PREDICTOR_DP_HPP
 
 #include <valarray>
 #include <vector>
 
-namespace rank_predictor::dp {
+namespace mahjong::rank_predictor::dp {
   std::vector<std::vector<double>> predict_rank(const std::valarray<int>& initial,
                                                 const std::vector<int>& fu_list,
                                                 const std::vector<int>& han_list,

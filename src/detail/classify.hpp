@@ -1,9 +1,9 @@
-#ifndef CLASSIFY_HPP
-#define CLASSIFY_HPP
+#ifndef MAHJONG_RANK_PREDICTOR_DETAIL_CLASSIFY_HPP
+#define MAHJONG_RANK_PREDICTOR_DETAIL_CLASSIFY_HPP
 
 #include <valarray>
 
-namespace rank_predictor::detail {
+namespace mahjong::rank_predictor::detail {
   int classfiy(const std::valarray<int>& scores);
 }
 

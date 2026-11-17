@@ -55,7 +55,7 @@ namespace {
   }
 }
 
-namespace rank_predictor::detail {
+namespace mahjong::rank_predictor::detail {
   std::pair<int, int> calc_score_tsumo(const int fu, const int han, const bool is_oya)
   {
     assert(fu != 0 && han != 0);
