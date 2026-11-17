@@ -55,7 +55,7 @@ namespace mahjong::rank_predictor::mc {
             static_cast<double>(rank_classes[0] + rank_classes[1] + rank_classes[2] + rank_classes[3] + rank_classes[4] + rank_classes[5]) / num_playout,
             static_cast<double>(rank_classes[6] + rank_classes[7] + rank_classes[12] + rank_classes[13] + rank_classes[18] + rank_classes[19]) / num_playout,
             static_cast<double>(rank_classes[8] + rank_classes[10] + rank_classes[14] + rank_classes[16] + rank_classes[20] + rank_classes[22]) / num_playout,
-            static_cast<double>(rank_classes[9] + rank_classes[11] + rank_classes[14] + rank_classes[15] + rank_classes[21] + rank_classes[23]) / num_playout,
+            static_cast<double>(rank_classes[9] + rank_classes[11] + rank_classes[15] + rank_classes[17] + rank_classes[21] + rank_classes[23]) / num_playout,
         },
         {
             static_cast<double>(rank_classes[6] + rank_classes[7] + rank_classes[8] + rank_classes[9] + rank_classes[10] + rank_classes[11]) / num_playout,
