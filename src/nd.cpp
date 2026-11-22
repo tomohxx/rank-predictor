@@ -102,7 +102,7 @@ namespace mahjong::rank_predictor::nd {
     ublas::matrix<double> second_moment(4, 4, 0.);
 
     for (const auto& pattern : patterns) {
-      const auto delta = calc_delta(pattern.actor, pattern.target, oya, pattern.fu, pattern.han, false);
+      const auto delta = calc_delta(pattern.actor, pattern.target, oya, pattern.fu, pattern.han);
       ublas::vector<double> tmp(4);
 
       std::copy(std::cbegin(delta), std::cend(delta), tmp.begin());

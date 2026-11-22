@@ -17,7 +17,7 @@ namespace mahjong::rank_predictor::mc {
 
     const std::size_t pid = dist(engine);
     const auto& pattern = patterns[pid];
-    const auto delta = calc_delta(pattern.actor, pattern.target, oya, pattern.fu, pattern.han, false);
+    const auto delta = calc_delta(pattern.actor, pattern.target, oya, pattern.fu, pattern.han);
     const auto dest = source + delta;
 
     return dest;

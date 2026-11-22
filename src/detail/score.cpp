@@ -26,32 +26,10 @@ namespace {
     }
   }
 
-  // 100点未満を切り上げて100で割る
+  // 100点未満を切り上げる
   int ceil(const int n)
   {
-    return (n + 99) / 100;
-  }
-
-  // 1000点未満を四捨五入する
-  int round(const int n)
-  {
-    return (n + 5) / 10;
-  }
-
-  // 1000点未満を四捨五入する
-  std::pair<int, int> round(const std::pair<int, int>& p)
-  {
-    return {round(p.first), round(p.second)};
-  }
-
-  int round_if(const int n, const bool b)
-  {
-    return b ? round(n) : n * 100;
-  }
-
-  std::pair<int, int> round_if(const std::pair<int, int>& p, const bool b)
-  {
-    return b ? round(p) : std::make_pair(p.first * 100, p.second * 100);
+    return (n + 99) / 100 * 100;
   }
 }
 
@@ -82,15 +60,5 @@ namespace mahjong::rank_predictor::detail {
     else {
       return ceil(base_score * 4);
     }
-  }
-
-  std::pair<int, int> calc_score_tsumo(const int fu, const int han, const bool is_oya, const bool rounding)
-  {
-    return round_if(calc_score_tsumo(fu, han, is_oya), rounding);
-  }
-
-  int calc_score_ron(int fu, int han, bool is_oya, bool rounding)
-  {
-    return round_if(calc_score_ron(fu, han, is_oya), rounding);
   }
 }

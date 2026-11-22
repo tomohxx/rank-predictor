@@ -22,7 +22,7 @@ namespace mahjong::rank_predictor {
   using Patterns = std::vector<Pattern>;
 
   Patterns make_patterns(const std::vector<int>& fu_list, const std::vector<int>& han_list);
-  Dist calc_delta(int actor, int target, int oya, int fu, int han, bool rounding);
+  Dist calc_delta(int actor, int target, int oya, int fu, int han);
 }
 
 #endif
