@@ -1,27 +1,38 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.20)
 
-project(rank-predictor)
+project(rank-predictor LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 23)
-set(CMAKE_CXX_FLAGS_DEBUG "-O0 -Wall -Wextra -g")
-set(CMAKE_CXX_FLAGS_RELEASE "-O3 -Wall -Wextra")
+include(GNUInstallDirs)
 
-add_library(rank_predictor STATIC
-  src/rank_predictor/detail/classify.cpp
-  src/rank_predictor/detail/score.cpp
-  src/rank_predictor/common.cpp
-  src/rank_predictor/dp.cpp
-  src/rank_predictor/mc.cpp)
-set(PUBLIC_HEADERS
-  src/rank_predictor/dp.hpp
-  src/rank_predictor/mc.hpp)
-set_target_properties(rank_predictor PROPERTIES PUBLIC_HEADER "${PUBLIC_HEADERS}")
-install(TARGETS rank_predictor EXPORT RankPredictor
-  PUBLIC_HEADER DESTINATION include/rank_predictor)
-install(EXPORT RankPredictor FILE RankPredictorConfig.cmake DESTINATION share/cmake)
+find_package(Boost 1.81 REQUIRED)
 
-add_executable(main1 src/main1.cpp)
+add_library(rank_predictor
+  src/detail/classify.cpp
+  src/detail/score.cpp
+  src/common.cpp
+  src/mc.cpp
+  src/nd.cpp)
+target_link_libraries(rank_predictor PRIVATE
+  $<BUILD_INTERFACE:Boost::headers>)
+target_compile_features(rank_predictor PUBLIC cxx_std_23)
+target_compile_options(rank_predictor PUBLIC
+  $<$<CONFIG:Debug>:-O0 -Wall -Wextra -g>
+  $<$<CONFIG:Release>:-O3 -Wall -Wextra>)
+target_include_directories(rank_predictor PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>)
+
+install(TARGETS rank_predictor
+  EXPORT RankPredictor
+  LIBRARY DESTINATION lib)
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/mahjong DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(EXPORT RankPredictor
+  FILE RankPredictorConfig.cmake
+  NAMESPACE RankPredictor::
+  DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/mahjong)
+
+add_executable(main1 tests/main1.cpp)
 target_link_libraries(main1 rank_predictor)
 
-add_executable(main2 src/main2.cpp)
+add_executable(main2 tests/main2.cpp)
 target_link_libraries(main2 rank_predictor)

@@ -1,7 +1,10 @@
+#ifndef MAHJONG_RANK_PREDICTOR_COMMON_HPP
+#define MAHJONG_RANK_PREDICTOR_COMMON_HPP
+
 #include <valarray>
 #include <vector>
 
-namespace rank_predictor {
+namespace mahjong::rank_predictor {
   constexpr int NUM_PLAYERS = 4;
   constexpr int NUM_CLASSES = 24;
 
@@ -19,5 +22,7 @@ namespace rank_predictor {
   using Patterns = std::vector<Pattern>;
 
   Patterns make_patterns(const std::vector<int>& fu_list, const std::vector<int>& han_list);
-  Dist calc_delta(int actor, int target, int oya, int fu, int han, bool rounding);
+  Dist calc_delta(int actor, int target, int oya, int fu, int han);
 }
+
+#endif

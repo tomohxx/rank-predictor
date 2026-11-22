@@ -1,7 +1,7 @@
 #include "common.hpp"
 #include "detail/score.hpp"
 
-namespace rank_predictor {
+namespace mahjong::rank_predictor {
   Patterns make_patterns(const std::vector<int>& fu_list, const std::vector<int>& han_list)
   {
     Patterns patterns;
@@ -21,24 +21,19 @@ namespace rank_predictor {
     return patterns;
   }
 
-  Dist calc_delta(const int actor,
-                  const int target,
-                  const int oya,
-                  const int fu,
-                  const int han,
-                  const bool rounding)
+  Dist calc_delta(const int actor, const int target, const int oya, const int fu, const int han)
   {
     Dist delta(0, NUM_PLAYERS);
 
     if (actor == target) {
-      const auto [x, y] = detail::calc_score_tsumo(fu, han, actor == oya, rounding);
+      const auto [x, y] = detail::calc_score_tsumo(fu, han, actor == oya);
 
       for (int pid = 0; pid < NUM_PLAYERS; ++pid) {
         delta[pid] = (pid == actor ? (pid == oya ? x * 3 : x * 2 + y) : (pid == oya ? -y : -x));
       }
     }
     else {
-      delta[actor] = detail::calc_score_ron(fu, han, actor == oya, rounding);
+      delta[actor] = detail::calc_score_ron(fu, han, actor == oya);
       delta[target] = -delta[actor];
     }
 
