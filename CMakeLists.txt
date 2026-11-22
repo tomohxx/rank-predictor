@@ -10,7 +10,6 @@ add_library(rank_predictor
   src/detail/classify.cpp
   src/detail/score.cpp
   src/common.cpp
-  src/dp.cpp
   src/mc.cpp
   src/nd.cpp)
 target_link_libraries(rank_predictor PRIVATE
@@ -31,9 +30,6 @@ install(EXPORT RankPredictor
   FILE RankPredictorConfig.cmake
   NAMESPACE RankPredictor::
   DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/mahjong)
-
-add_executable(main1 tests/main1.cpp)
-target_link_libraries(main1 rank_predictor)
 
 add_executable(main2 tests/main2.cpp)
 target_link_libraries(main2 rank_predictor)
