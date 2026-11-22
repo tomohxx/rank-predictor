@@ -31,8 +31,8 @@ install(EXPORT RankPredictor
   NAMESPACE RankPredictor::
   DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/mahjong)
 
+add_executable(main1 tests/main1.cpp)
+target_link_libraries(main1 rank_predictor)
+
 add_executable(main2 tests/main2.cpp)
 target_link_libraries(main2 rank_predictor)
-
-add_executable(main3 tests/main3.cpp)
-target_link_libraries(main3 rank_predictor)

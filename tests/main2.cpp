@@ -1,15 +1,12 @@
 #include <format>
 #include <iostream>
-#include <mahjong/rank_predictor/mc.hpp>
+#include <mahjong/rank_predictor/nd.hpp>
 
 int main()
 {
-  using mahjong::rank_predictor::mc::predict_rank;
+  using mahjong::rank_predictor::nd::predict_rank;
 
-  std::random_device seed_gen;
-  std::mt19937_64 engine(seed_gen());
-
-  const auto rank = predict_rank({25000, 33000, 17000, 25000}, {30}, {3, 4, 5}, 0.2, 7, 0, 10000, engine);
+  const auto rank = predict_rank({25000, 33000, 17000, 25000}, {30}, {3, 4, 5}, 0.2, 7, 0);
 
   for (std::size_t i = 0; i < rank.size(); ++i) {
     for (std::size_t j = 0; j < rank[i].size(); ++j) {
